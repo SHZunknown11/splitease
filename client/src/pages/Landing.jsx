@@ -42,7 +42,7 @@ export default function Landing() {
         <span className="wordmark"><Logo size={32} />SplitEase</span>
         <h1>Five friends, nine debts, three payments.</h1>
         <p className="landing-lede">
-          SplitEase remembers who paid for what, then works out the fewest payments that leave everyone square.
+          SplitEase remembers who paid for what, then works out a short list of payments that leaves everyone square.
         </p>
         <div className="demo">
           <DebtGraph members={PEOPLE} raw={NINE} clean={THREE} simplified={untangled}

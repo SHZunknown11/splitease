@@ -1,7 +1,7 @@
 # SplitEase
 
 A MERN stack app for splitting shared expenses in a group (flat, trip, team) and settling
-up with the fewest possible payments. Built by Mohammad Taha (24BCS12733, section NTPP_719_A)
+up with a short list of payments. Built by Mohammad Taha (24BCS12733, section NTPP_719_A)
 during the A2IT InternEdge internship "Full Stack Web Development With MERN"
 (20 May 2026 to 02 Jul 2026).
 
@@ -9,7 +9,7 @@ during the A2IT InternEdge internship "Full Stack Web Development With MERN"
 - Register, log in (JWT, bcrypt-hashed passwords), change your display name
 - Groups with several members; add people already in the app or type new names
 - Expenses split equally, by exact amounts or by percentages (the form blocks splits that do not add up)
-- Live balances and a settle-up graph: the tangle of "who owes whom" is reduced to the fewest payments
+- Live balances and a settle-up graph: the tangle of "who owes whom" is reduced to at most one payment fewer than the number of people
 - Record payments, delete expenses, download a group's expenses as CSV
 - Live updates between browsers (Socket.io), overview charts, light and dark theme, phone-friendly layout
 
