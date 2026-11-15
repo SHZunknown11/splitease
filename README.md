@@ -66,7 +66,7 @@ and the API and Socket.io on the same origin, so no CORS or URL settings are nee
 
 The free Render service sleeps when idle, so the first request after a pause takes about a minute.
 
-Live URL: _add it here after the first deploy_
+Live URL: https://splitease-jyuu.onrender.com (sample login: `taha@example.com` / `sample`)
 
 ## Project layout
     server/src/app.js          Express routes and validation
