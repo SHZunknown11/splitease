@@ -3,7 +3,8 @@ services:
     name: splitease
     runtime: node
     plan: free
-    buildCommand: cd client && npm ci && npm run build && cd ../server && npm ci
+    # NODE_ENV=production makes npm skip devDependencies, and vite (the build tool) is one, so the client asks for them.
+    buildCommand: cd client && npm ci --include=dev && npm run build && cd ../server && npm ci
     startCommand: node server/src/index.js
     healthCheckPath: /
     envVars:
