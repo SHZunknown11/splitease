@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: splitease
+    runtime: node
+    plan: free
+    buildCommand: cd client && npm ci && npm run build && cd ../server && npm ci
+    startCommand: node server/src/index.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ALLOW_RESET
+        value: "false"
+      - key: MONGODB_URI
+        sync: false # paste the MongoDB Atlas connection string in the Render dashboard

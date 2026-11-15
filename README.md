@@ -54,6 +54,20 @@ database named `splitease_test` (wiped before each run, dropped after). Set `TES
 | `JWT_SECRET` | a fixed development value | **Set a real secret in production** |
 | `ALLOW_RESET` | on | Set to `false` to disable the "Restore sample data" endpoint |
 
+## Deploy (MongoDB Atlas + Render)
+One Render web service runs everything: Express serves the built React app from `client/dist`
+and the API and Socket.io on the same origin, so no CORS or URL settings are needed.
+
+1. **Atlas:** create a free M0 cluster, add a database user, allow access from anywhere
+   (`0.0.0.0/0`), and copy the connection string (put a database name such as `/splitease` before the `?`).
+2. **Render:** New > Blueprint, pick this repo. `render.yaml` sets the build and start commands,
+   generates `JWT_SECRET`, and turns `ALLOW_RESET` off. Paste the Atlas string into `MONGODB_URI` when asked.
+3. Open the Render URL. The first start on an empty database loads the sample data.
+
+The free Render service sleeps when idle, so the first request after a pause takes about a minute.
+
+Live URL: _add it here after the first deploy_
+
 ## Project layout
     server/src/app.js          Express routes and validation
     server/src/models/         Mongoose models (User, Group, Expense, Settlement)

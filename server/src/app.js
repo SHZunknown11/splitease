@@ -1,3 +1,6 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import express from 'express'
 import cors from 'cors'
 import bcrypt from 'bcryptjs'
@@ -143,6 +146,18 @@ export function createApp() {
 
   app.use('/api', api)
   app.use('/api', (_req, res) => res.status(404).json({ error: 'No such endpoint.' }))
+
+  // In production one service does everything: serve the built React app and fall back to
+  // index.html for client-side routes. Skipped when client/dist does not exist (local dev, tests).
+  const dist = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../client/dist')
+  if (fs.existsSync(path.join(dist, 'index.html'))) {
+    app.use(express.static(dist, { index: false, maxAge: '1h' }))
+    // A missing file (has an extension, e.g. /assets/old.js) is a real 404, not the app shell.
+    app.get('*', (req, res) => (path.extname(req.path)
+      ? res.status(404).type('text').send('Not found')
+      : res.sendFile(path.join(dist, 'index.html'))))
+  }
+
   // eslint-disable-next-line no-unused-vars
   app.use((err, _req, res, _next) => {
     if (err instanceof HttpError) return res.status(err.status).json({ error: err.message })
